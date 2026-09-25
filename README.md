@@ -1,82 +1,41 @@
-# 🚀 Deploy Coolify — Démo de déploiement
+# Deploy Coolify
 
-Une simple landing page construite avec **React + TypeScript + Vite**, utilisée comme support pour démontrer comment déployer une application sur [Coolify](https://coolify.io).
+Une simple landing page pour démontrer comment déployer une application sur [Coolify](https://coolify.io).
 
-> Ce projet n'est pas une vraie application — c'est une interface de démonstration créée spécifiquement pour illustrer le processus de déploiement sur Coolify.
+## Stack
 
-## 📸 Aperçu
+- React + TypeScript
+- Vite
+- Docker (Nginx)
 
-Landing page portfolio d'un designer web fictif, avec :
+## Déploiement sur Coolify (via Dockerfile)
 
-- Hero section avec galerie photo
-- Section "À propos" avec statistiques
-- Grille de projets
-- Design responsive et animations au scroll
+Le projet est configuré avec un `Dockerfile` multi-stage optimisé pour la production. L'application est buildée avec Node, puis les fichiers statiques sont servis très rapidement via Nginx.
 
-## 🛠 Stack technique
+### Étapes dans Coolify :
 
-| Technologie | Version |
-|---|---|
-| React | 19.x |
-| TypeScript | 5.x |
-| Vite | 8.x |
+1. Connectez votre dépôt Git.
+2. Choisissez le **Build Pack : Dockerfile** (Coolify devrait le détecter automatiquement).
+3. Dans la configuration du port (Ports / Expose), assurez-vous de mapper le port **80** (le port exposé par Nginx dans le conteneur).
+4. Cliquez sur **Deploy**.
 
-## ⚡ Lancer en local
+## Lancer en local (Sans Docker)
 
 ```bash
-# Cloner le repo
-git clone https://github.com/<ton-username>/deploy-coolify.git
-cd deploy-coolify
-
-# Installer les dépendances
 npm install
-
-# Lancer le serveur de dev (port 3000)
 npm run dev
 ```
+→ L'app sera disponible sur http://localhost:3000
 
-L'app sera accessible sur **http://localhost:3000**
+## Lancer en local (Avec Docker)
 
-## 🐳 Déployer sur Coolify
+Si vous souhaitez tester l'image Docker sur votre machine avant de déployer :
 
-### Prérequis
+```bash
+# Construire l'image Docker
+docker build -t deploy-coolify .
 
-- Un serveur avec [Coolify](https://coolify.io) installé
-- Un repo Git (GitHub, GitLab, etc.)
-
-### Étapes
-
-1. **Pusher le code** sur ton repo Git
-2. **Se connecter** à ton dashboard Coolify
-3. **Ajouter une nouvelle ressource** → choisir "Application"
-4. **Connecter le repo Git** contenant ce projet
-5. **Configurer le build** :
-   - Build Command : `npm run build`
-   - Output Directory : `dist`
-   - Install Command : `npm install`
-6. **Définir le port** : `3000` (ou laisser Coolify gérer avec le build statique)
-7. **Déployer** 🎉
-
-### Alternative : Build statique (Nixpacks)
-
-Coolify détecte automatiquement les projets Vite via Nixpacks. Il suffit de pusher le code et Coolify s'occupe du reste.
-
-## 📁 Structure du projet
-
+# Lancer le conteneur sur le port 8080
+docker run -p 8080:80 deploy-coolify
 ```
-deploy-coolify/
-├── public/
-│   └── images/          # Images de la landing page
-├── src/
-│   ├── App.tsx          # Composant principal
-│   ├── App.css          # Styles des composants
-│   ├── index.css        # Styles globaux + variables
-│   └── main.tsx         # Point d'entrée
-├── index.html
-├── vite.config.ts       # Config Vite (port 3000)
-└── package.json
-```
-
-## 📝 Licence
-
-Ce projet est un support de démonstration. Libre d'utilisation.
+→ L'app sera disponible sur http://localhost:8080
