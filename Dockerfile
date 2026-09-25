@@ -22,7 +22,7 @@ FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Changer le port par défaut de Nginx (80) vers 3000
-RUN sed -i 's/listen  *80;/listen 3000;/g' /etc/nginx/conf.d/default.conf
+# RUN sed -i 's/listen  *80;/listen 3000;/g' /etc/nginx/conf.d/default.conf
 
 # Exposer le port 3000
 EXPOSE 3000
